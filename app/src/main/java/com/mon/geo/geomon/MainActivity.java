@@ -64,12 +64,12 @@ public class MainActivity extends Activity {
     @OnClick(R.id.sendRequest)
     public void onSendRequestClick() {
         NetBlaster.getInstance(this).addToRequestQueue(new StringRequest(
-                Request.Method.GET, "http://126.72.84.123:8080/register?ip=asdasd",
+                Request.Method.GET, "http://google.com",
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("VolleyResponse", response);
+                        Log.i("VolleyResponse", response.substring(0, 500));
                     }
                 },
 
