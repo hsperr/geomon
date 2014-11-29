@@ -3,10 +3,21 @@ package com.mon.geo.geomon;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.mon.geo.geomon.Net.NetBlaster;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends Activity {
@@ -15,6 +26,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
 
         Button buttonMap = (Button)findViewById(R.id.buttonMap);
         buttonMap.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +59,27 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.sendRequest)
+    public void onSendRequestClick() {
+        NetBlaster.getInstance(this).addToRequestQueue(new StringRequest(
+                Request.Method.GET, "http://126.72.84.123:8080/register?ip=asdasd",
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("VolleyResponse", response);
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("VolleyResponse", error.getMessage());
+                    }
+                }
+        ));
     }
 
 }
