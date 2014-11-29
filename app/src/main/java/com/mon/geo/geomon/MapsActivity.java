@@ -61,8 +61,13 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        Location myLocation = mMap.getMyLocation();
-        LatLng locationInLatLng = new LatLng(myLocation.getLatitude(),myLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(locationInLatLng));
+        mMap.setMyLocationEnabled(true);
+        if(mMap.isMyLocationEnabled()) {
+            Location myLocation = mMap.getMyLocation();
+            if (myLocation != null) {
+                LatLng locationInLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(locationInLatLng));
+            }
+        }
     }
 }
