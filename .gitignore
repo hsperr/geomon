@@ -1,3 +1,6 @@
+#don't commi intellij
+.idea/
+
 # Built application files
 *.apk
 *.ap_
