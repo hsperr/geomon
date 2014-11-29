@@ -27,3 +27,6 @@ proguard/
 
 # Log Files
 *.log
+
+#don't commmit real app keys
+app/src/debug/res/values/google_maps_api.xml
