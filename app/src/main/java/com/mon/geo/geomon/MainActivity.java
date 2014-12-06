@@ -27,15 +27,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-
-        Button buttonMap = (Button)findViewById(R.id.buttonMap);
-        buttonMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(myIntent);
-            }
-        });
     }
 
 
@@ -59,6 +50,12 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.buttonMap)
+    public void onOpenMapClick() {
+                Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(myIntent);
     }
 
     @OnClick(R.id.sendRequest)
