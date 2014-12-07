@@ -27,4 +27,12 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/buttonMap"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toMonsterSack"
+        android:text="Check my monster sack"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/sendRequest"/>
+
 </RelativeLayout>

@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,7 +14,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.mon.geo.geomon.Net.NetBlaster;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 
@@ -54,29 +51,35 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.buttonMap)
     public void onOpenMapClick() {
-                Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(myIntent);
+        Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(myIntent);
     }
 
     @OnClick(R.id.sendRequest)
     public void onSendRequestClick() {
         NetBlaster.getInstance(this).addToRequestQueue(new StringRequest(
-                Request.Method.GET, "http://google.com",
+            Request.Method.GET, "http://google.com",
 
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("VolleyResponse", response.substring(0, 500));
-                    }
-                },
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i("VolleyResponse", response.substring(0, 500));
+                }
+            },
 
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("VolleyResponse", error.getMessage());
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VolleyResponse", error.getMessage());
                     }
                 }
         ));
+    }
+
+    @OnClick(R.id.toMonsterSack)
+    public void onMonsterSackClick() {
+        Intent toSack = new Intent(MainActivity.this, MonsterSackActivity.class);
+        startActivity(toSack);
     }
 
 }
