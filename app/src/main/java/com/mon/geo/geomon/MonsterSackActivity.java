@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import entity.MonsterSack;
+
 
 public class MonsterSackActivity extends Activity
         implements MonsterSackFragment.OnFragmentInteractionListener,
                    MonsterDetailsFragment.OnFragmentInteractionListener {
+
+    /** All mah monstaaaars~ <3 */
+    private MonsterSack mMonsters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

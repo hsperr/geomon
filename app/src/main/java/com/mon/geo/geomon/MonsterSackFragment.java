@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -46,6 +47,16 @@ public class MonsterSackFragment extends ListFragment {
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ListView listView = getListView();
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        listView.setSelector(R.drawable.listview_selectable_item);
+
+        // TODO set initial selection
+    }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -68,6 +79,8 @@ public class MonsterSackFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
+        v.setSelected(true);
 
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
