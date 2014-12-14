@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.mon.geo.geomon.Map.GeoInfo;
 import com.mon.geo.geomon.Net.NetBlaster;
 
 import butterknife.ButterKnife;
@@ -22,11 +23,14 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
+    private GeoInfo geoInfo = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+        geoInfo = new GeoInfo(this);
     }
 
 
@@ -60,21 +64,36 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.sendRequest)
     public void onSendRequestClick() {
+        String url =  "http://10.0.2.2:8080/get_spawn?pos=";
+        String location = geoInfo.getLocationAsString();
+        if(location==""){
+            Log.w("VolleyQuery","No Location found, returning");
+            return;
+        }
+        url+=location;
+        Log.v("VolleyQuery","Query: "+url);
+
         NetBlaster.getInstance(this).addToRequestQueue(new StringRequest(
-                Request.Method.GET, "http://google.com",
+                Request.Method.GET, url,
 
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("VolleyResponse", response.substring(0, 500));
+                        Log.i("VolleyResponse", response);
                     }
                 },
 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("VolleyResponse", error.getMessage());
+                        //TODO: crashes on some errors because getMessage seems to be empty
+                        if (error.getMessage() == null) {
+                            Log.e("VolleyResponse", "Connection failed, empty error.");
+                        } else {
+                            Log.e("VolleyResponse", error.getMessage());
+                        }
                     }
+
                 }
         ));
     }
