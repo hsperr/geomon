@@ -55,7 +55,7 @@ public class GeoInfo {
         long fiveMinutesInMs = 300000;
         long distanceInMeters = 20;
 
-        lm.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER,fiveMinutesInMs, distanceInMeters, locationListener);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,fiveMinutesInMs, distanceInMeters, locationListener);
     }
 
     public String getLocationAsString(){

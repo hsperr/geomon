@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -80,6 +81,8 @@ public class MainActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("VolleyResponse", response);
+                        TextView debugText = (TextView)findViewById(R.id.debugText);
+                        debugText.append("A "+response+" appeared, how lovely.\n");
                     }
                 },
 
